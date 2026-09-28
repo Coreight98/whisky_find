@@ -111,8 +111,22 @@ def check_sources():
             f"sources.md: {name!r} has language {lang!r}, not in {sorted(KNOWN_LANGS)}"
 
 
+EVALS = ROOT / "references" / "evals.md"
+
+
+def check_evals():
+    body = EVALS.read_text(encoding="utf-8")
+    fixtures = re.findall(r"^### (.+)$", body, re.M)
+    assert len(fixtures) >= 9, \
+        f"evals.md: {len(fixtures)} fixtures; the five Review Focus cases plus four baselines"
+    blocks = re.split(r"^### .+$", body, flags=re.M)[1:]
+    for name, block in zip(fixtures, blocks):
+        assert "Expect:" in block, f"evals.md: fixture {name!r} states no expected outcome"
+
+
 def main():
-    checks = [check_skill, check_sources, check_card_template, check_siblings_scope]
+    checks = [check_skill, check_sources, check_card_template,
+              check_siblings_scope, check_evals]
     failures = []
     for check in checks:
         try:
