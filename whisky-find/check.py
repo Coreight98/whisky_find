@@ -42,8 +42,51 @@ def check_skill():
         assert section in body, f"SKILL.md: missing section {section!r}"
 
 
+SOURCES = ROOT / "references" / "sources.md"
+
+KNOWN_LANGS = {"en", "ja", "zh", "fr", "de", "it", "nl", "ko"}
+
+
+def parse_table(body, heading):
+    """Return the rows of the first markdown table under `heading`.
+
+    Each row is a list of stripped cell strings. The header row and the
+    `|---|` separator are skipped.
+    """
+    start = body.index(heading)
+    after = body[start + len(heading):]
+    rows = []
+    for line in after.splitlines():
+        stripped = line.strip()
+        if not stripped.startswith("|"):
+            if rows:
+                break
+            continue
+        cells = [c.strip() for c in stripped.strip("|").split("|")]
+        if all(set(c) <= {"-", ":"} and c for c in cells):
+            continue
+        rows.append(cells)
+    assert rows, f"no table found under {heading!r}"
+    return rows[1:]
+
+
+def check_sources():
+    body = SOURCES.read_text(encoding="utf-8")
+    heading = "## Bottler and producer languages"
+    assert heading in body, f"sources.md: missing section {heading!r}"
+    rows = parse_table(body, heading)
+    assert len(rows) >= 20, \
+        f"sources.md: bottler table has only {len(rows)} rows; it is the whole point of the file"
+    for row in rows:
+        assert len(row) >= 2, f"sources.md: malformed row {row!r}"
+        name, lang = row[0], row[1]
+        assert name, f"sources.md: row with empty name: {row!r}"
+        assert lang in KNOWN_LANGS, \
+            f"sources.md: {name!r} has language {lang!r}, not in {sorted(KNOWN_LANGS)}"
+
+
 def main():
-    checks = [check_skill]
+    checks = [check_skill, check_sources]
     failures = []
     for check in checks:
         try:
