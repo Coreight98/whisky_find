@@ -45,6 +45,12 @@ exist.
 one release — "Springbank 12 Cask Strength" spans a dozen batches — ask which
 one. One question is cheaper than researching the wrong bottle.
 
+**Say what you corrected.** Resolving a misspelled or partial input to a single
+candidate is not the same as the user having asked for it. Print the correction
+above the card — what they typed, what you searched — so a wrong resolution is
+visible. `Springbnak 1997 Cadenhaed 26년` resolving to a 25y is a different
+bottle, and a card that does not say so is confidently wrong.
+
 **If you cannot identify it**, say so and show what you searched. Do not
 assemble a card from a bottling that merely resembles the request.
 
@@ -54,7 +60,9 @@ Search three language sets for every lookup:
 
 1. **English** — always.
 2. **The bottler's or producer's home language** — look it up in
-   `references/sources.md`.
+   `references/sources.md`. **Not in the table?** The table is a shortcut, not a
+   census: infer the language from the producer's country, fall back to English,
+   and say which language you used. Never skip the step silently.
 3. **The user's language** — Korean by default.
 
 For a retailer, importer, or festival selection, also search the destination
@@ -73,7 +81,8 @@ What is this bottle, how does it taste, what is it worth.
 Read `references/sources.md` for where to look. Fetch facts and opinions from
 different tiers; never read a forum for an ABV.
 
-Render exactly this card, in this section order, every time:
+Render this card every time. **The section order is fixed; the field list is
+not** — see Non-Scotch bottles below.
 
 ```
 Springbank 1997 / 26y - Cadenhead (IB)
@@ -117,6 +126,14 @@ Ask for sister casks to search the 1997 vintage.
 Every section prints even when empty: `unknown` for a missing field, `none
 found` for an empty list. A thin card is a correct answer for an obscure bottle.
 
+**Notes come from this bottling only.** NOSE, PALATE, and FINISH carry notes
+written about the bottling you identified. A note about a different cask, a
+different batch, or a different year of the same expression is not evidence
+about this one — print `unknown` instead. This is the most convincing way the
+card can be wrong: nothing is invented, a real source is cited, and the notes
+still describe another bottle. When only a neighbouring bottling has notes, say
+so in CONFLICTS and leave the rows `unknown`.
+
 **Non-Scotch bottles.** The field names above are Scotch-shaped. Bourbon has a
 mashbill, a barrel entry proof, and often no age or vintage; Japanese and
 Taiwanese whiskies may have neither cask number nor outturn. Relabel or omit the
@@ -129,9 +146,13 @@ does not promise the lot is still open.
 
 What else came out of the same distillate. Runs only when asked.
 
-**Stays inside the distillery.** A bottle from another distillery that tastes
-similar is out of scope, however good the match. That is a recommender; this
-skill identifies and prices the bottle in front of the user.
+**Stays inside the distillery.** A bottle from another distillery is out of
+scope however good the taste match,
+**including one under the same ownership**.
+Longrow and Hazelburn are Springbank the distillery and belong; Kilkerran is
+distilled at Glengyle and does not, whoever owns it. Cross-distillery matching
+is a recommender; this skill identifies and prices the bottle in front of the
+user.
 
 **Runs without a target bottle.** "What came out of Springbank 1997" is a
 complete request. A distillery and a vintage are enough; do not demand a

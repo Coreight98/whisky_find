@@ -59,16 +59,23 @@ it as this one. Compare against fixture 2's honesty standard.
 
 ### 6. Unreadable or partial label photo
 
-Input: a label photo cropped so the distillery name and ABV are visible but the
-cask number, vintage, and outturn are cut off.
+Input: `references/fixtures/partial-label.jpg`. Create it once: take any bottle
+photo you own, crop so the distillery name and ABV stay legible and the cask
+number, vintage, and outturn are cut off, and commit it at that path. Reuse the
+same file every run — a different crop each time tests a different thing.
 Expect: reports the fields it could actually read, names the ones it could not,
 and asks. No release inferred from a distillery name and a bottle silhouette.
 If several releases match what is readable, it asks which rather than choosing.
 
 ### 7. Real bottle, almost no review coverage
 
-Input: an obscure European IB single cask with a Whiskybase entry and no
-long-form reviews — for example a Whisky-Fässle bottling from the early 2010s.
+Input: recorded below. Choose it once: on Whiskybase, find a Whisky-Fässle or
+Malts of Scotland single cask with a catalogued entry and fewer than three
+ratings, then write its exact name and cask number on the next line and use that
+same bottle every run.
+
+    Recorded bottle: __________________ (fill in on first run)
+
 Expect: every card section renders. SCORES may be one rating or `unknown`.
 NOSE/PALATE/FINISH may be `unknown`. AUCTION may be `none found`. The card is
 mostly empty and that is the right answer.

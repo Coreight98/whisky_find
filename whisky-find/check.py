@@ -49,11 +49,56 @@ def check_card_template():
     _, body = split_frontmatter(SKILL)
     start = body.index("## lookup")
     section = body[start:body.index("## siblings")]
+    fences = section.count("```")
+    assert fences >= 2, "SKILL.md: lookup has no fenced card template"
+    card = section[section.index("```") + 3:]
+    card = card[:card.index("```")]
+    assert len(card.strip().splitlines()) >= 15, \
+        "SKILL.md: the card template was gutted; it must show the whole card"
     for label in CARD_LABELS:
-        assert label in section, \
+        assert label in card, \
             f"SKILL.md: card template is missing the {label!r} block"
     assert "unknown" in section, \
         "SKILL.md: lookup must say what to print when a field is missing"
+
+
+# Each entry: (where to look, distinctive sentence, what breaks without it).
+# Assert the RULE, not a keyword — a token check passes on prose that says the
+# opposite, which is worse than no check at all.
+RUNTIME_RULES = [
+    ("## lookup", "never searches for sister casks",
+     "lookup/siblings firewall"),
+    ("## lookup", "Notes come from this bottling only",
+     "tasting notes may be lifted from a different bottling"),
+    ("## lookup", "Do not print empty Scotch fields",
+     "non-Scotch bottles render empty Scotch fields"),
+    ("## Identify the bottle", "Say what you corrected",
+     "a silently corrected name returns a card for another bottle"),
+    ("## Identify the bottle", "Do not\nassemble a card from a bottling that merely resembles the request",
+     "an unidentifiable bottle gets a plausible card"),
+    ("## Language routing", "Not in the table",
+     "bottlers outside the table have no routing rule"),
+    ("## siblings", "Stays inside the distillery",
+     "siblings may cross to another distillery"),
+    ("## siblings", "including one under the same ownership",
+     "a same-owner sibling distillery slips into tier 2"),
+    ("## siblings", "none found",
+     "an empty sibling tier has no defined output"),
+    ("## Trust rules", "Never invent",
+     "missing fields may be guessed"),
+    ("## Trust rules", "Never average across scales",
+     "incompatible scores get averaged"),
+    ("## Trust rules", "Label what a price is",
+     "hammer, retail and premium-inclusive prices get mixed"),
+]
+
+
+def check_runtime_rules():
+    _, body = split_frontmatter(SKILL)
+    for heading, sentence, consequence in RUNTIME_RULES:
+        assert heading in body, f"SKILL.md: missing section {heading!r}"
+        assert sentence in body, \
+            f"SKILL.md: {heading} lost the rule {sentence!r} — without it, {consequence}"
 
 
 def check_siblings_scope():
@@ -109,6 +154,13 @@ def check_sources():
         assert name, f"sources.md: row with empty name: {row!r}"
         assert lang in KNOWN_LANGS, \
             f"sources.md: {name!r} has language {lang!r}, not in {sorted(KNOWN_LANGS)}"
+    # A bottler routed to a language with no review sources sends the search
+    # nowhere: step 2 of Language routing silently no-ops.
+    routed = {row[1] for row in rows}
+    reviewed = {row[0] for row in parse_table(body, "**Reviews and scores, by language:**")}
+    orphans = sorted(routed - reviewed)
+    assert not orphans, \
+        f"sources.md: bottlers route to {orphans} but the review table has no row for them"
 
 
 EVALS = ROOT / "references" / "evals.md"
@@ -122,11 +174,18 @@ def check_evals():
     blocks = re.split(r"^### .+$", body, flags=re.M)[1:]
     for name, block in zip(fixtures, blocks):
         assert "Expect:" in block, f"evals.md: fixture {name!r} states no expected outcome"
+        assert "Input:" in block, f"evals.md: fixture {name!r} states no input"
+        assert "for example" not in block.lower(), \
+            f"evals.md: fixture {name!r} gestures at an input instead of naming one; " \
+            "it cannot be re-run against the same bottle twice"
+        expectation = block[block.index("Expect:") + len("Expect:"):].strip()
+        assert len(expectation) >= 80, \
+            f"evals.md: fixture {name!r} has an Expect: body too thin to fail against"
 
 
 def main():
     checks = [check_skill, check_sources, check_card_template,
-              check_siblings_scope, check_evals]
+              check_runtime_rules, check_siblings_scope, check_evals]
     failures = []
     for check in checks:
         try:

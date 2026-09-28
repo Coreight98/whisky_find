@@ -84,6 +84,8 @@ listings, then auction lot descriptions.
 | de | whisky.de, Whiskyexperts.net, German whisky forums |
 | fr | Whisky Magazine France, French whisky forums |
 | zh | 知乎, 微博, Taiwanese whisky blogs |
+| it | Whisky Club Italia, Italian whisky forums and collector blogs |
+| nl | Whiskybase forum (Dutch threads), Belgian and Dutch whisky blogs |
 
 Reddit's own search is poor. Reach r/Scotch through Google with
 `site:reddit.com/r/Scotch`.
