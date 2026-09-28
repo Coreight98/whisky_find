@@ -127,6 +127,43 @@ does not promise the lot is still open.
 
 ## siblings
 
+What else came out of the same distillate. Runs only when asked.
+
+**Stays inside the distillery.** A bottle from another distillery that tastes
+similar is out of scope, however good the match. That is a recommender; this
+skill identifies and prices the bottle in front of the user.
+
+**Runs without a target bottle.** "What came out of Springbank 1997" is a
+complete request. A distillery and a vintage are enough; do not demand a
+specific bottling first.
+
+Reuse Identify the bottle and Language routing above, then search two tiers and
+label which tier each result belongs to:
+
+- **[1] True sister** — same distillery, same distillation date, adjacent or
+  same-parcel cask numbers. The only tier that is literally a sister cask.
+- **[2] Same distillery and vintage** — same distillery, vintage within one year
+  either side, comparable cask type, any bottler. Comparable, not identical.
+
+```
+SISTER CASKS - Springbank 1997
+  [1] #1421, #1423 Cadenhead - same parcel
+  [2] Springbank 1997 24y Signatory
+      Springbank 1997 25y OB
+```
+
+**Where to search.** Whiskybase browsed by distillery and vintage is the main
+tool. Then bottler release lists for that year, and auction archives, which
+surface bottlings whose own pages are long gone.
+
+**The producer's current range is not its catalog.** Search discontinued,
+one-off, and country-specific releases, and former owner and house brands. If a
+search comes back empty, retry under other names, other languages, and archived
+pages before concluding there is nothing.
+
+An empty tier prints `none found`. Never promote a tier-2 result into tier 1 to
+fill it. Adjacent cask numbers within one outturn are not evidence of a shared
+distillation date unless a source says so — absent that, tier 1 is `none found`.
 ## Trust rules
 
 **Conflict hierarchy**, applied in this order:

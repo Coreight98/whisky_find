@@ -56,6 +56,18 @@ def check_card_template():
         "SKILL.md: lookup must say what to print when a field is missing"
 
 
+def check_siblings_scope():
+    _, body = split_frontmatter(SKILL)
+    start = body.index("## siblings")
+    section = body[start:body.index("## Trust rules")]
+    assert "[1]" in section and "[2]" in section, \
+        "SKILL.md: siblings must define both tiers"
+    assert "[3]" not in section, \
+        "SKILL.md: tier 3 is a cross-distillery recommender and was cut on purpose"
+    assert "none found" in section, \
+        "SKILL.md: siblings must say what an empty tier prints"
+
+
 SOURCES = ROOT / "references" / "sources.md"
 
 KNOWN_LANGS = {"en", "ja", "zh", "fr", "de", "it", "nl", "ko"}
@@ -100,7 +112,7 @@ def check_sources():
 
 
 def main():
-    checks = [check_skill, check_sources, check_card_template]
+    checks = [check_skill, check_sources, check_card_template, check_siblings_scope]
     failures = []
     for check in checks:
         try:
