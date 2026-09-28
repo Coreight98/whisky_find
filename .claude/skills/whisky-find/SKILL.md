@@ -126,7 +126,9 @@ Ask for sister casks to search the 1997 vintage.
 Every section prints even when empty. A field prints `unknown`; a list prints
 `none found`. Which is which: Distillery, Bottler, Cask, ABV, outturn, Price,
 SCORES, NOSE, PALATE, FINISH are fields. AUCTION's two rows and CONFLICTS are
-lists. A thin card is a correct answer for an obscure bottle.
+lists. A field that does not apply to this kind of whisky at all is omitted
+rather than printed as `unknown` — see Non-Scotch bottles below. A thin card is
+a correct answer for an obscure bottle.
 
 **Several bottles named.** Look each one up and print one card per bottle, in
 the order the user named them. Do not declare a winner: which bottle is better
