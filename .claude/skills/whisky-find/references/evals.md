@@ -130,6 +130,8 @@ the auction lot (`살만해?` is a buy word on an already-named lot, and must st
 FIRE), the bottle comparison (two named bottles FIRE; the skill prints both
 cards and picks no winner), the label-translation photo (a photo alone must not
 FIRE — the user wants text read, not a bottle researched), and the open-ended
-recommendation (must SKIP even though it says 위스키). A bare distillery name
-such as "Talisker 평점" may FIRE; the skill then asks which bottling, which is
-the disambiguation rule working rather than a trigger failure.
+recommendation (must SKIP even though it says 위스키). A bare brand or
+distillery name such as "Talisker 평점" or "맥켈란 어때" must FIRE — the
+exclusion covers requests naming no bottle, brand, or lot, so a brand alone is
+in scope; the skill then asks which bottling, which is the disambiguation rule
+working rather than a trigger failure.

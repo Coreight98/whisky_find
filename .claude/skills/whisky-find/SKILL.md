@@ -1,6 +1,6 @@
 ---
 name: whisky-find
-description: Identify and research a specific whisky — official bottling, independent bottling, or single cask — from a name, a label photo, or an auction lot, searching English, the bottler's own language, and the user's language. Also searches sister casks from the same distillate. Use when the user names a bottle, shows a bottle photo and wants to know what it is, pastes an auction listing, or asks what a whisky is, how it tastes, what it is worth, or what else came out of that vintage. Do not use for cocktail recipes, bar recommendations, or open-ended "what should I buy or drink" requests where no specific bottle is named — valuing or judging a bottle or lot the user has already named is in scope.
+description: Identify and research a specific whisky — official bottling, independent bottling, or single cask — from a name, a label photo, or an auction lot, searching English, the bottler's own language, and the user's language. Also searches sister casks from the same distillate. Use when the user names a bottle, shows a bottle photo and wants to know what it is, pastes an auction listing, or asks what a whisky is, how it tastes, what it is worth, or what else came out of that vintage. Do not use for cocktail recipes, bar recommendations, or open-ended "what should I buy or drink" requests where no bottle, brand, or lot is named — valuing or judging a bottle or lot the user has already named is in scope.
 ---
 
 # whisky-find
