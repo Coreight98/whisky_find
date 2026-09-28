@@ -93,7 +93,7 @@ Cask        Refill sherry hogshead, 1997->2023
 ABV 49.2% / outturn 234 / NCF, no colour
 Price       ~GBP450 retail
 
-SCORES  Whiskybase 89.1 (n=41) / Whiskyfun 90
+SCORES  Whiskybase 89.1 (n=41) / Whiskyfun 90 (n=1)
         r/Scotch ~88 (n=6)
 
 NOSE    dried fig, wet rope, struck match
@@ -123,8 +123,10 @@ SOURCES
 Ask for sister casks to search the 1997 vintage.
 ```
 
-Every section prints even when empty: `unknown` for a missing field, `none
-found` for an empty list. A thin card is a correct answer for an obscure bottle.
+Every section prints even when empty. A field prints `unknown`; a list prints
+`none found`. Which is which: Distillery, Bottler, Cask, ABV, outturn, Price,
+SCORES, NOSE, PALATE, FINISH are fields. AUCTION's two rows and CONFLICTS are
+lists. A thin card is a correct answer for an obscure bottle.
 
 **Notes come from this bottling only.** NOSE, PALATE, and FINISH carry notes
 written about the bottling you identified. A note about a different cask, a
@@ -185,6 +187,7 @@ pages before concluding there is nothing.
 An empty tier prints `none found`. Never promote a tier-2 result into tier 1 to
 fill it. Adjacent cask numbers within one outturn are not evidence of a shared
 distillation date unless a source says so — absent that, tier 1 is `none found`.
+
 ## Trust rules
 
 **Conflict hierarchy**, applied in this order:

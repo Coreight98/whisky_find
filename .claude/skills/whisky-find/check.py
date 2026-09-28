@@ -183,9 +183,20 @@ def check_evals():
             f"evals.md: fixture {name!r} has an Expect: body too thin to fail against"
 
 
+def check_installed_path():
+    """A skill outside a skills root is never discovered, however good it is."""
+    assert ROOT.name == "whisky-find", \
+        f"skill directory is {ROOT.name!r}; it must match the frontmatter name"
+    assert ROOT.parent.name == "skills", \
+        (f"skill lives at {ROOT.parent}/{ROOT.name}, which Claude Code never scans. "
+         "It must sit in a skills root: .claude/skills/<name>/ in a project, or "
+         "~/.claude/skills/<name>/ for every session.")
+
+
 def main():
-    checks = [check_skill, check_sources, check_card_template,
-              check_runtime_rules, check_siblings_scope, check_evals]
+    checks = [check_installed_path, check_skill, check_sources,
+              check_card_template, check_runtime_rules,
+              check_siblings_scope, check_evals]
     failures = []
     for check in checks:
         try:
