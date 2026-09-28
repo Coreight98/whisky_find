@@ -19,7 +19,10 @@ REQUIRED_SECTIONS = [
     "## lookup",
     "## siblings",
     "## Trust rules",
+    "## Depth",
 ]
+
+CARD_LABELS = ["SCORES", "NOSE", "PALATE", "FINISH", "AUCTION", "CONFLICTS", "SOURCES"]
 
 
 def split_frontmatter(path):
@@ -40,6 +43,17 @@ def check_skill():
         "SKILL.md: description must be substantial enough to trigger on"
     for section in REQUIRED_SECTIONS:
         assert section in body, f"SKILL.md: missing section {section!r}"
+
+
+def check_card_template():
+    _, body = split_frontmatter(SKILL)
+    start = body.index("## lookup")
+    section = body[start:body.index("## siblings")]
+    for label in CARD_LABELS:
+        assert label in section, \
+            f"SKILL.md: card template is missing the {label!r} block"
+    assert "unknown" in section, \
+        "SKILL.md: lookup must say what to print when a field is missing"
 
 
 SOURCES = ROOT / "references" / "sources.md"
@@ -86,7 +100,7 @@ def check_sources():
 
 
 def main():
-    checks = [check_skill, check_sources]
+    checks = [check_skill, check_sources, check_card_template]
     failures = []
     for check in checks:
         try:
