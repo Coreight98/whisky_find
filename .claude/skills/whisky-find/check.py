@@ -68,6 +68,8 @@ def check_card_template():
 RUNTIME_RULES = [
     ("## lookup", "never searches for sister casks",
      "lookup/siblings firewall"),
+    ("## lookup", "Do not declare a winner",
+     "a comparison of named bottles turns into a recommendation"),
     ("## lookup", "Notes come from this bottling only",
      "tasting notes may be lifted from a different bottling"),
     ("## lookup", "Do not print empty Scotch fields",

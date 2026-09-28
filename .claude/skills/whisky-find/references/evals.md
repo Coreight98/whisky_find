@@ -95,3 +95,41 @@ would; batch code C923 decodes to its release; no age-statement or vintage field
 is printed empty just because Scotch bottles have one. `outturn` and `cask
 number` are omitted rather than printed as `unknown`, because they are not
 concepts this bottle has.
+
+## Triggering
+
+### 10. The description fires on the right things and not the wrong ones
+
+Input: paste the `description` field from `SKILL.md` — and nothing else, no file
+access, no repo — to a fresh agent, with the messages below. Ask it FIRE or SKIP
+per message. The description is all a real agent sees when deciding to invoke a
+skill, so anything else in the prompt invalidates the run.
+
+    FIRE  Springbank 1997 26년 Cadenhead 정보 알려줘
+    FIRE  라가불린 16 어때?
+    FIRE  이 위스키 뭔지 알아? [bottle label photo]
+    FIRE  https://whiskyauctioneer.com/lot/12345 이거 살만해?
+    FIRE  Springbank 1997에서 나온 다른 캐스크들 뭐 있어?
+    FIRE  Ardbeg Uigeadail 시음노트 좀
+    FIRE  Elijah Craig Barrel Proof C923 얼마야?
+    FIRE  Signatory Caol Ila 2010 cask 318089
+    FIRE  야마자키 12년이랑 히비키 17년 중에 뭐가 나아?
+    SKIP  위스키 하나 추천해줘, 10만원 이하로
+    SKIP  피트 위스키 입문하려는데 뭐부터 마셔야 해?
+    SKIP  하이볼 만드는 법 알려줘
+    SKIP  이번 주말에 갈 만한 위스키 바 추천
+    SKIP  위스키 투자 어떻게 시작해?
+    SKIP  글렌피딕 15년 병에 적힌 일본어가 뭐라는 거야? [photo]
+    SKIP  이 병 라벨 사진인데 글씨가 안 보여, 화질 개선해줘
+    SKIP  위스키 재고 정리 좀 도와줘, 엑셀 파일 있어
+    SKIP  이 코드 리뷰해줘
+
+Expect: every line matches. The four that a previous wording got wrong are the
+ones to watch, because they are the ones a future edit will break again:
+the auction lot (`살만해?` is a buy word on an already-named lot, and must still
+FIRE), the bottle comparison (two named bottles FIRE; the skill prints both
+cards and picks no winner), the label-translation photo (a photo alone must not
+FIRE — the user wants text read, not a bottle researched), and the open-ended
+recommendation (must SKIP even though it says 위스키). A bare distillery name
+such as "Talisker 평점" may FIRE; the skill then asks which bottling, which is
+the disambiguation rule working rather than a trigger failure.

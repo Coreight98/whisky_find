@@ -1,6 +1,6 @@
 ---
 name: whisky-find
-description: Identify and research a specific whisky — official bottling, independent bottling, or single cask — from a name, a label photo, or an auction lot. Searches English, the bottler's own language, and the user's language, then returns one card with cask facts, aggregated scores, translated tasting notes, auction prices, and explicit conflicts. Also searches sister casks from the same distillate. Use when the user names a bottle, shows a bottle photo, pastes an auction listing, or asks what a whisky is, how it tastes, what it is worth, or what else came out of that vintage. Do not use for cocktail recipes, bar recommendations, or suggesting what whisky to buy.
+description: Identify and research a specific whisky — official bottling, independent bottling, or single cask — from a name, a label photo, or an auction lot, searching English, the bottler's own language, and the user's language. Also searches sister casks from the same distillate. Use when the user names a bottle, shows a bottle photo and wants to know what it is, pastes an auction listing, or asks what a whisky is, how it tastes, what it is worth, or what else came out of that vintage. Do not use for cocktail recipes, bar recommendations, or open-ended "what should I buy or drink" requests where no specific bottle is named — valuing or judging a bottle or lot the user has already named is in scope.
 ---
 
 # whisky-find
@@ -127,6 +127,12 @@ Every section prints even when empty. A field prints `unknown`; a list prints
 `none found`. Which is which: Distillery, Bottler, Cask, ABV, outturn, Price,
 SCORES, NOSE, PALATE, FINISH are fields. AUCTION's two rows and CONFLICTS are
 lists. A thin card is a correct answer for an obscure bottle.
+
+**Several bottles named.** Look each one up and print one card per bottle, in
+the order the user named them. Do not declare a winner: which bottle is better
+depends on what the person likes, and choosing for them is the recommendation
+this skill does not make. Differences the cards already show — age, cask, ABV,
+scores, price — are facts and belong in the cards.
 
 **Notes come from this bottling only.** NOSE, PALATE, and FINISH carry notes
 written about the bottling you identified. A note about a different cask, a
