@@ -14,10 +14,10 @@ search quietly misses them.
 **`lookup`** (default) — what is this bottle, how does it taste, what is it
 worth. Renders one card.
 
-**`siblings`** — what else came out of the same distillate, split into true
-sister casks and same-distillery/same-vintage bottlings. Runs only when asked.
+**`siblings`** — what else came out of the same distillate. Renders the sister
+cask list. Runs only when asked.
 
-## The card
+## lookup — the card
 
 ```
 Springbank 1997 / 26y - Cadenhead (IB)
@@ -51,6 +51,33 @@ SOURCES
 
 Every section prints even when empty — `unknown` for a field, `none found` for a
 list. A thin card is the correct answer for an obscure bottle.
+
+## siblings — sister casks
+
+Ask for sister casks and it searches the same distillate, in two labelled tiers:
+
+```
+SISTER CASKS - Springbank 1997
+  [1] #1421, #1423 Cadenhead - same parcel
+  [2] Springbank 1997 24y Signatory
+      Springbank 1997 25y OB
+```
+
+**[1] True sister** — same distillery, same distillation date, adjacent or
+same-parcel cask numbers. The only tier that is literally a sister cask.
+
+**[2] Same distillery and vintage** — vintage within a year either side,
+comparable cask type, any bottler. Comparable, not identical.
+
+An empty tier prints `none found`; a tier-2 result is never promoted to fill
+tier 1. Adjacent cask numbers inside one outturn are not evidence of a shared
+distillation date unless a source says so.
+
+It runs without a target bottle — "what came out of Springbank 1997" is a
+complete request. And it searches past the producer's current range:
+discontinued, one-off, and country-specific releases, former owner and house
+brands, and auction archives, which surface bottlings whose own pages are long
+gone.
 
 ## What it will not do
 
