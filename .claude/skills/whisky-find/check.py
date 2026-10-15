@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Structural checks for the whisky-find skill.
 
-Run: python3 whisky-find/check.py
+Run: python3 .claude/skills/whisky-find/check.py
 Checks only what a machine can check: frontmatter, required sections, and the
 shape of the source tables. Whether a research card is any good is checked by
 running references/evals.md by hand.
